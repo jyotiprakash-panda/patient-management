@@ -84,3 +84,6 @@ Thumbs.db
 
 # AWS credentials
 .aws/
+
+# Ignore database volumes
+db_volumes_*/
