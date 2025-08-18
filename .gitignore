@@ -84,6 +84,7 @@ Thumbs.db
 
 # AWS credentials
 .aws/
-
 # Ignore database volumes
 db_volumes_*/
+db_volumes_patient-service-db/
+
