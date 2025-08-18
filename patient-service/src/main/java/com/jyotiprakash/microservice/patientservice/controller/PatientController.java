@@ -3,6 +3,7 @@ package com.jyotiprakash.microservice.patientservice.controller;
 import com.jyotiprakash.microservice.patientservice.dto.PatientRequestDTO;
 import com.jyotiprakash.microservice.patientservice.dto.PatientResponseDTO;
 import com.jyotiprakash.microservice.patientservice.dto.Validators.CreatePatientValidationGroup;
+import com.jyotiprakash.microservice.patientservice.grpc.BillingServiceGrpcClient;
 import com.jyotiprakash.microservice.patientservice.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,9 +23,11 @@ import java.util.UUID;
 public class PatientController {
 
     private PatientService patientService;
+    private BillingServiceGrpcClient billingServiceGrpcClient;
 
-    public PatientController(PatientService patientService) {
+    public PatientController(PatientService patientService, BillingServiceGrpcClient billingServiceGrpcClient) {
         this.patientService = patientService;
+        this.billingServiceGrpcClient = billingServiceGrpcClient;
     }
 
     @GetMapping
@@ -41,6 +44,8 @@ public class PatientController {
             @RequestBody PatientRequestDTO patientRequestDTO) {
 
         PatientResponseDTO patientResponseDTO = patientService.createPatient(patientRequestDTO);
+        billingServiceGrpcClient.createBillingAccount(patientResponseDTO.getId().toString(), patientResponseDTO.getName(), patientRequestDTO.getEmail());
+
 
         return ResponseEntity.ok().body(patientResponseDTO);
     }
