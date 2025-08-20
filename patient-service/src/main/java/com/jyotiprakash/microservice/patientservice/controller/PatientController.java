@@ -44,9 +44,7 @@ public class PatientController {
             @RequestBody PatientRequestDTO patientRequestDTO) {
 
         PatientResponseDTO patientResponseDTO = patientService.createPatient(patientRequestDTO);
-        billingServiceGrpcClient.createBillingAccount(patientResponseDTO.getId().toString(), patientResponseDTO.getName(), patientRequestDTO.getEmail());
-
-
+//        billingServiceGrpcClient.createBillingAccount(patientResponseDTO.getId().toString(), patientResponseDTO.getName(), patientRequestDTO.getEmail());
         return ResponseEntity.ok().body(patientResponseDTO);
     }
 
