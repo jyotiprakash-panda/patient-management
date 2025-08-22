@@ -5,6 +5,7 @@ import com.jyotiprakash.microservice.patientservice.dto.PatientResponseDTO;
 import com.jyotiprakash.microservice.patientservice.exception.EmailAlreadyExistsException;
 import com.jyotiprakash.microservice.patientservice.exception.PatientNotFoundException;
 import com.jyotiprakash.microservice.patientservice.grpc.BillingServiceGrpcClient;
+import com.jyotiprakash.microservice.patientservice.kafka.KafkaProducer;
 import com.jyotiprakash.microservice.patientservice.mapper.PatientMapper;
 import com.jyotiprakash.microservice.patientservice.model.Patient;
 import com.jyotiprakash.microservice.patientservice.repository.PatientRepository;
@@ -18,11 +19,11 @@ import java.util.UUID;
 public class PatientService {
     private final PatientRepository patientRepository;
     private final BillingServiceGrpcClient billingServiceGrpcClient;
-    private final com.pm.patientservice.kafka.KafkaProducer kafkaProducer;
+    private final KafkaProducer kafkaProducer;
 
     public PatientService(PatientRepository patientRepository,
                           BillingServiceGrpcClient billingServiceGrpcClient,
-                          com.pm.patientservice.kafka.KafkaProducer kafkaProducer) {
+                          KafkaProducer kafkaProducer) {
         this.patientRepository = patientRepository;
         this.billingServiceGrpcClient = billingServiceGrpcClient;
         this.kafkaProducer = kafkaProducer;

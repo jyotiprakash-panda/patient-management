@@ -1,4 +1,4 @@
-package com.pm.patientservice.kafka;
+package com.jyotiprakash.microservice.patientservice.kafka;
 import com.jyotiprakash.microservice.patientservice.model.Patient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
